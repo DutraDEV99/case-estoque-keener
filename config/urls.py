@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
+from django.views.generic import RedirectView
 
 from estoque.views import (
     listar_produtos,
@@ -15,6 +16,16 @@ from estoque.views import (
 )
 
 urlpatterns = [
+    # Página inicial
+    path(
+        "",
+        RedirectView.as_view(
+            pattern_name="login",
+            permanent=False,
+        ),
+        name="home",
+    ),
+
     # Administração
     path("admin/", admin.site.urls),
 
