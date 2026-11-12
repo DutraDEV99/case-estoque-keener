@@ -6,28 +6,23 @@ Sistema de Gestão de Estoque - Keener Innovations
 
 import os
 from pathlib import Path
-from django.core.exceptions import ImproperlyConfigured
 
-# ==========================================
-# DIRETÓRIO PRINCIPAL
-# ==========================================
+import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# ==========================================
 # SEGURANÇA
-# ==========================================
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 if not SECRET_KEY:
     raise ImproperlyConfigured(
-        "Configure a variável de ambiente DJANGO_SECRET_KEY."
+        "Configure a variável DJANGO_SECRET_KEY."
     )
 
 DEBUG = os.environ.get(
-    "DJANGO_DEBUG", "True"
+    "DJANGO_DEBUG", "False"
 ).lower() == "true"
 
 ALLOWED_HOSTS = [
@@ -39,10 +34,15 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS", ""
+    ).split(",")
+    if origin.strip()
+]
 
-# ==========================================
-# APLICAÇÕES INSTALADAS
-# ==========================================
+# APLICAÇÕES
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -54,13 +54,11 @@ INSTALLED_APPS = [
     "estoque.apps.EstoqueConfig",
 ]
 
-
-# ==========================================
 # MIDDLEWARE
-# ==========================================
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -69,13 +67,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-
 ROOT_URLCONF = "config.urls"
 
-
-# ==========================================
 # TEMPLATES
-# ==========================================
 
 TEMPLATES = [
     {
@@ -92,29 +86,33 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = "config.wsgi.application"
 
+# BANCO DE DADOS
+# Render: PostgreSQL
+# Computador: MySQL
 
-# ==========================================
-# BANCO DE DADOS - MYSQL
-# ==========================================
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "estoque",
-        "USER": "django_estoque",
-        "PASSWORD": os.environ["ESTOQUE_DB_PASSWORD"],
-        "HOST": "localhost",
-        "PORT": "3306",
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=not DEBUG,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "estoque",
+            "USER": "django_estoque",
+            "PASSWORD": os.environ["ESTOQUE_DB_PASSWORD"],
+            "HOST": "localhost",
+            "PORT": "3306",
+        }
+    }
 
-
-# ==========================================
 # VALIDAÇÃO DE SENHAS
-# ==========================================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -131,54 +129,45 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# ==========================================
-# IDIOMA E FUSO HORÁRIO
-# ==========================================
+# IDIOMA E HORÁRIO
 
 LANGUAGE_CODE = "pt-br"
-
 TIME_ZONE = "America/Sao_Paulo"
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# ==========================================
 # ARQUIVOS ESTÁTICOS
-# ==========================================
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-# ==========================================
 # LOGIN E LOGOUT
-# ==========================================
 
 LOGIN_URL = "/login/"
-
 LOGIN_REDIRECT_URL = "/produtos/"
-
 LOGOUT_REDIRECT_URL = "/login/"
 
-
-# ==========================================
 # PROTEÇÕES ADICIONAIS
-# ==========================================
 
 SESSION_COOKIE_HTTPONLY = True
-
 CSRF_COOKIE_HTTPONLY = True
-
 X_FRAME_OPTIONS = "DENY"
-
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SESSION_COOKIE_SECURE = not DEBUG
-
 CSRF_COOKIE_SECURE = not DEBUG
 
+SECURE_PROXY_SSL_HEADER = (
+    "HTTP_X_FORWARDED_PROTO", "https"
+)
+
+SECURE_SSL_REDIRECT = not DEBUG
 SECURE_HSTS_SECONDS = 0
