@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos | Keener Innovations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            min-height: 100vh;
+            padding: 32px 20px;
+            background: #101d35;
+            color: white;
+        }
+
+        .brand {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 48px;
+        }
+
+        .brand span {
+            color: #27a5ff;
+        }
+
+        .menu a {
+            display: block;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 9px;
+            color: #c3cee0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #087de0;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 42px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 29px;
+            margin: 0 0 9px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #748197;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 13px 18px;
+            background: #087de0;
+            color: white;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: #0667ba;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 26px;
+            box-shadow: 0 6px 25px rgba(17, 35, 63, 0.05);
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .toolbar h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .filter {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #52627a;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter input {
+            width: 17px;
+            height: 17px;
+            accent-color: #087de0;
+            cursor: pointer;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e9edf4;
+            font-size: 14px;
+        }
+
+        th {
+            color: #748197;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-active {
+            background: #def7e9;
+            color: #137a45;
+        }
+
+        .status-inactive {
+            background: #ffe8ec;
+            color: #bd233c;
+        }
+
+        .action-cell {
+            text-align: right;
+            width: 100px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .dropdown summary {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid #e1e7f0;
+            border-radius: 9px;
+            background: #fff;
+            font-size: 23px;
+            font-weight: 700;
+            color: #52627a;
+            cursor: pointer;
+        }
+
+        .dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dropdown summary:hover {
+            background: #f0f5fc;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 44px;
+            z-index: 20;
+            width: 180px;
+            padding: 7px;
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 11px;
+            box-shadow: 0 10px 28px rgba(16, 29, 53, 0.14);
+        }
+
+        .dropdown-menu a,
+        .dropdown-menu button {
+            display: block;
+            width: 100%;
+            padding: 11px 12px;
+            border: none;
+            border-radius: 7px;
+            background: transparent;
+            color: #263b57;
+            text-decoration: none;
+            text-align: left;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu button:hover {
+            background: #f0f5fc;
+        }
+
+        .dropdown-menu .delete {
+            color: #bd233c;
+        }
+
+        .dropdown-menu .delete:hover {
+            background: #fff0f2;
+        }
+
+        .dropdown-menu form {
+            margin: 0;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            background: #e7f1ff;
+            color: #174d80;
+            border-radius: 9px;
+        }
+
+        .message.success {
+            background: #def7e9;
+            color: #137a45;
+        }
+
+        .message.error {
+            background: #ffe8ec;
+            color: #bd233c;
+        }
+
+        .empty {
+            padding: 35px;
+            text-align: center;
+            color: #748197;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .brand {
+                margin-bottom: 20px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 22px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">KEENER<span>.</span></div>
+
+        <nav class="menu">
+            <a href="{% url 'listar_produtos' %}" class="active">
+                Produtos
+            </a>
+            <a href="{% url 'cadastrar_produto' %}">
+                Cadastrar produto
+            </a>
+            <a href="{% url 'registrar_movimentacao' %}">
+                Movimentar estoque
+            </a>
+            <a href="{% url 'historico_movimentacoes' %}">
+                Histórico
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main">
+
+        <div class="header">
+            <div>
+                <h1>Produtos em estoque</h1>
+                <p>Gerencie os produtos cadastrados no sistema.</p>
+            </div>
+
+            <a href="{% url 'cadastrar_produto' %}" class="btn-primary">
+                + Novo produto
+            </a>
+        </div>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <section class="card">
+
+            <div class="toolbar">
+                <h2>Lista de produtos</h2>
+
+                <label class="filter">
+                    <input
+                        type="checkbox"
+                        id="mostrarDesativados"
+                        onchange="alternarDesativados()">
+                    Mostrar desativados
+                </label>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Código</th>
+                            <th>Quantidade</th>
+                            <th>Status</th>
+                            <th class="action-cell">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for produto in produtos %}
+                            <tr
+                                class="{% if not produto.ativo %}produto-inativo hidden{% else %}produto-ativo{% endif %}">
+
+                                <td>
+                                    <strong>{{ produto.nome }}</strong>
+                                </td>
+
+                                <td>{{ produto.codigo }}</td>
+
+                                <td>{{ produto.quantidade }}</td>
+
+                                <td>
+                                    {% if produto.ativo %}
+                                        <span class="status status-active">
+                                            Ativo
+                                        </span>
+                                    {% else %}
+                                        <span class="status status-inactive">
+                                            Inativo
+                                        </span>
+                                    {% endif %}
+                                </td>
+
+                                <td class="action-cell">
+                                    <details class="dropdown">
+                                        <summary aria-label="Abrir ações do produto">
+                                            &#8942;
+                                        </summary>
+
+                                        <div class="dropdown-menu">
+
+                                            <a href="{% url 'editar_produto' produto.id %}">
+                                                Editar produto
+                                            </a>
+
+                                            <form
+                                                method="POST"
+                                                action="{% url 'alternar_status_produto' produto.id %}">
+                                                {% csrf_token %}
+
+                                                {% if produto.ativo %}
+                                                    <button type="submit">
+                                                        Desativar produto
+                                                    </button>
+                                                {% else %}
+                                                    <button type="submit">
+                                                        Reativar produto
+                                                    </button>
+                                                {% endif %}
+                                            </form>
+
+                                            <form
+                                                method="POST"
+                                                action="{% url 'excluir_produto' produto.id %}"
+                                                onsubmit="return confirm('Tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita.');">
+                                                {% csrf_token %}
+
+                                                <button type="submit" class="delete">
+                                                    Excluir produto
+                                                </button>
+                                            </form>
+
+                                        </div>
+                                    </details>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="empty">
+                                    Nenhum produto cadastrado.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <p id="avisoSemProdutos" class="empty hidden">
+                Nenhum produto ativo para exibir.
+            </p>
+
+        </section>
+
+    </main>
+
+    <script>
+        function alternarDesativados() {
+            const mostrar = document.getElementById(
+                "mostrarDesativados"
+            ).checked;
+
+            const inativos = document.querySelectorAll(
+                ".produto-inativo"
+            );
+
+            inativos.forEach(function(produto) {
+                produto.classList.toggle("hidden", !mostrar);
+            });
+
+            const ativos = document.querySelectorAll(
+                ".produto-ativo"
+            );
+
+            const aviso = document.getElementById(
+                "avisoSemProdutos"
+            );
+
+            aviso.classList.toggle(
+                "hidden",
+                mostrar || ativos.length > 0
+            );
+        }
+
+        document.addEventListener("click", function(event) {
+            document.querySelectorAll(
+                "details.dropdown[open]"
+            ).forEach(function(menu) {
+                if (!menu.contains(event.target)) {
+                    menu.removeAttribute("open");
+                }
+            });
+        });
+
+        document.querySelectorAll(
+            "details.dropdown"
+        ).forEach(function(menu) {
+            menu.addEventListener("toggle", function() {
+                if (menu.open) {
+                    document.querySelectorAll(
+                        "details.dropdown[open]"
+                    ).forEach(function(outroMenu) {
+                        if (outroMenu !== menu) {
+                            outroMenu.removeAttribute("open");
+                        }
+                    });
+                }
+            });
+        });
+
+        alternarDesativados();
+    </script>
+
+</body>
+</html>

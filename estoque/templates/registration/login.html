@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Keener Innovations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .presentation {
+            width: 50%;
+            background: linear-gradient(
+                145deg,
+                #101d35 0%,
+                #142e53 60%,
+                #075ba8 100%
+            );
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation::after {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            right: -140px;
+            bottom: -140px;
+        }
+
+        .brand {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+
+        .brand span {
+            color: #27a5ff;
+        }
+
+        .presentation h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            max-width: 480px;
+            margin: 0 0 22px;
+        }
+
+        .presentation p {
+            color: #c0d0e4;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 450px;
+        }
+
+        .presentation-footer {
+            margin-top: 70px;
+            color: #8ea7c7;
+            font-size: 13px;
+        }
+
+        .login-area {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .mobile-brand {
+            display: none;
+        }
+
+        .login-card h2 {
+            font-size: 32px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            color: #748197;
+            font-size: 15px;
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d8e1ed;
+            border-radius: 9px;
+            background: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #087de0;
+            box-shadow: 0 0 0 3px rgba(8, 125, 224, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            background: #087de0;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #0667ba;
+        }
+
+        .register {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 14px;
+            color: #748197;
+        }
+
+        .register a {
+            color: #087de0;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register a:hover {
+            text-decoration: underline;
+        }
+
+        .errors {
+            padding: 13px 15px;
+            margin-bottom: 22px;
+            background: #ffe8ec;
+            color: #bd233c;
+            border-radius: 9px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .field-error {
+            margin-top: 7px;
+            color: #bd233c;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .presentation {
+                display: none;
+            }
+
+            .login-area {
+                width: 100%;
+                min-height: 100vh;
+                padding: 25px;
+            }
+
+            .mobile-brand {
+                display: block;
+                margin-bottom: 45px;
+                font-size: 29px;
+                font-weight: 800;
+                color: #101d35;
+            }
+
+            .mobile-brand span {
+                color: #087de0;
+            }
+
+            .login-card h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <section class="presentation">
+            <div class="brand">
+                KEENER<span>.</span>
+            </div>
+
+            <h1>
+                Gestão inteligente começa com organização.
+            </h1>
+
+            <p>
+                Controle seus produtos, acompanhe movimentações
+                e mantenha seu estoque organizado em uma
+                plataforma simples e eficiente.
+            </p>
+
+            <div class="presentation-footer">
+                Keener Innovations | Sistema de Controle de Estoque
+            </div>
+        </section>
+
+        <main class="login-area">
+
+            <div class="login-card">
+
+                <div class="mobile-brand">
+                    KEENER<span>.</span>
+                </div>
+
+                <h2>Bem-vindo de volta</h2>
+
+                <p class="subtitle">
+                    Entre com suas credenciais para acessar
+                    o sistema de estoque.
+                </p>
+
+                {% if form.non_field_errors %}
+                    <div class="errors">
+                        Usuário ou senha incorretos.
+                        Verifique seus dados e tente novamente.
+                    </div>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="field">
+                        <label for="{{ form.username.id_for_label }}">
+                            Nome de usuário
+                        </label>
+
+                        {{ form.username }}
+
+                        {% if form.username.errors %}
+                            <div class="field-error">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="{{ form.password.id_for_label }}">
+                            Senha
+                        </label>
+
+                        {{ form.password }}
+
+                        {% if form.password.errors %}
+                            <div class="field-error">
+                                {{ form.password.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <input
+                        type="hidden"
+                        name="next"
+                        value="{{ next }}">
+
+                    <button type="submit" class="btn-login">
+                        Entrar no sistema
+                    </button>
+                </form>
+
+                <div class="register">
+                    Ainda não possui uma conta?
+                    <a href="{% url 'cadastrar_usuario' %}">
+                        Criar conta
+                    </a>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

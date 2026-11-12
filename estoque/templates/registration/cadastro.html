@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta | Keener Innovations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .presentation {
+            width: 50%;
+            background: linear-gradient(
+                145deg,
+                #101d35 0%,
+                #142e53 60%,
+                #075ba8 100%
+            );
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation::after {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            right: -140px;
+            bottom: -140px;
+        }
+
+        .brand {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+
+        .brand span {
+            color: #27a5ff;
+        }
+
+        .presentation h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            max-width: 480px;
+            margin: 0 0 22px;
+        }
+
+        .presentation p {
+            color: #c0d0e4;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 450px;
+        }
+
+        .presentation-footer {
+            margin-top: 70px;
+            color: #8ea7c7;
+            font-size: 13px;
+        }
+
+        .register-area {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px 0;
+        }
+
+        .mobile-brand {
+            display: none;
+        }
+
+        .register-card h2 {
+            font-size: 32px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            color: #748197;
+            font-size: 15px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d8e1ed;
+            border-radius: 9px;
+            background: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #087de0;
+            box-shadow: 0 0 0 3px rgba(8, 125, 224, 0.1);
+        }
+
+        .field-help {
+            color: #748197;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 9px;
+        }
+
+        .field-help ul {
+            padding-left: 18px;
+            margin: 8px 0;
+        }
+
+        .field-help li {
+            margin-bottom: 5px;
+        }
+
+        .field-error {
+            color: #bd233c;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .field-error ul {
+            padding-left: 18px;
+        }
+
+        .errors {
+            padding: 13px 15px;
+            margin-bottom: 22px;
+            background: #ffe8ec;
+            color: #bd233c;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            background: #087de0;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-register:hover {
+            background: #0667ba;
+        }
+
+        .login-link {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 14px;
+            color: #748197;
+        }
+
+        .login-link a {
+            color: #087de0;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .presentation {
+                display: none;
+            }
+
+            .register-area {
+                width: 100%;
+                min-height: 100vh;
+                padding: 25px;
+            }
+
+            .mobile-brand {
+                display: block;
+                margin-bottom: 35px;
+                font-size: 29px;
+                font-weight: 800;
+                color: #101d35;
+            }
+
+            .mobile-brand span {
+                color: #087de0;
+            }
+
+            .register-card h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <section class="presentation">
+
+            <div class="brand">
+                KEENER<span>.</span>
+            </div>
+
+            <h1>
+                Comece a gerenciar seu estoque com eficiência.
+            </h1>
+
+            <p>
+                Crie sua conta para organizar produtos,
+                registrar movimentações e acompanhar
+                todas as operações do seu estoque.
+            </p>
+
+            <div class="presentation-footer">
+                Keener Innovations | Sistema de Controle de Estoque
+            </div>
+
+        </section>
+
+        <main class="register-area">
+
+            <div class="register-card">
+
+                <div class="mobile-brand">
+                    KEENER<span>.</span>
+                </div>
+
+                <h2>Criar conta</h2>
+
+                <p class="subtitle">
+                    Preencha os dados abaixo para acessar
+                    o sistema de controle de estoque.
+                </p>
+
+                {% if formulario.non_field_errors %}
+                    <div class="errors">
+                        {{ formulario.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="field">
+                        <label for="{{ formulario.username.id_for_label }}">
+                            Nome de usuário
+                        </label>
+
+                        {{ formulario.username }}
+
+                        {% if formulario.username.errors %}
+                            <div class="field-error">
+                                {{ formulario.username.errors }}
+                            </div>
+                        {% endif %}
+
+                        {% if formulario.username.help_text %}
+                            <div class="field-help">
+                                {{ formulario.username.help_text }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="{{ formulario.password1.id_for_label }}">
+                            Senha
+                        </label>
+
+                        {{ formulario.password1 }}
+
+                        {% if formulario.password1.errors %}
+                            <div class="field-error">
+                                {{ formulario.password1.errors }}
+                            </div>
+                        {% endif %}
+
+                        {% if formulario.password1.help_text %}
+                            <div class="field-help">
+                                {{ formulario.password1.help_text }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label for="{{ formulario.password2.id_for_label }}">
+                            Confirmar senha
+                        </label>
+
+                        {{ formulario.password2 }}
+
+                        {% if formulario.password2.errors %}
+                            <div class="field-error">
+                                {{ formulario.password2.errors }}
+                            </div>
+                        {% endif %}
+
+                        {% if formulario.password2.help_text %}
+                            <div class="field-help">
+                                {{ formulario.password2.help_text }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn-register">
+                        Criar minha conta
+                    </button>
+                </form>
+
+                <div class="login-link">
+                    Já possui uma conta?
+                    <a href="{% url 'login' %}">
+                        Entrar no sistema
+                    </a>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

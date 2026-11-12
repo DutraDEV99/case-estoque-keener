@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movimentar Estoque | Keener Innovations</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #101d35;
+            color: white;
+            position: fixed;
+            padding: 30px 20px;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .brand span {
+            color: #39a9ff;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #9aabc7;
+            margin-bottom: 45px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-radius: 9px;
+            text-decoration: none;
+            color: #c5d2e6;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #1c365c;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 29px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.04);
+            max-width: 650px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dbe3ef;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+            background: #fbfcfe;
+            color: #17243b;
+        }
+
+        input:focus, select:focus {
+            border-color: #087de0;
+            box-shadow: 0 0 0 3px rgba(8,125,224,.1);
+        }
+
+        .help {
+            color: #718096;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .error {
+            color: #c62828;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            background: #087de0;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #0665b5;
+        }
+
+        .btn-secondary {
+            background: #edf2f8;
+            color: #30415c;
+        }
+
+        .btn-secondary:hover {
+            background: #dce5f0;
+        }
+
+        .notice {
+            background: #eaf4ff;
+            border-left: 4px solid #087de0;
+            padding: 15px;
+            border-radius: 8px;
+            color: #31567b;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">KEENER<span>.</span></div>
+        <div class="subtitle">INNOVATIONS | STOCK SYSTEM</div>
+
+        <a href="{% url 'listar_produtos' %}">
+            Painel de estoque
+        </a>
+
+        <a href="{% url 'cadastrar_produto' %}">
+            Cadastrar produto
+        </a>
+
+        <a href="{% url 'registrar_movimentacao' %}" class="active">
+            Movimentar estoque
+        </a>
+
+        <a href="{% url 'historico_movimentacoes' %}">
+            Histórico
+        </a>
+    </aside>
+
+    <main class="main">
+        <h1>Movimentar Estoque</h1>
+        <p class="description">
+            Registre entradas e saídas de produtos do estoque.
+        </p>
+
+        <div class="card">
+            <h2>Nova movimentação</h2>
+
+            <div class="notice">
+                Selecione o produto, o tipo de movimentação e a quantidade.
+                O saldo do estoque será atualizado automaticamente.
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if formulario.non_field_errors %}
+                    <div class="error">
+                        {{ formulario.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="{{ formulario.produto.id_for_label }}">
+                        Produto
+                    </label>
+
+                    {{ formulario.produto }}
+
+                    {% for erro in formulario.produto.errors %}
+                        <p class="error">{{ erro }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ formulario.tipo.id_for_label }}">
+                        Tipo de movimentação
+                    </label>
+
+                    {{ formulario.tipo }}
+
+                    <p class="help">
+                        Entrada adiciona unidades. Saída retira unidades.
+                    </p>
+
+                    {% for erro in formulario.tipo.errors %}
+                        <p class="error">{{ erro }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ formulario.quantidade.id_for_label }}">
+                        Quantidade
+                    </label>
+
+                    {{ formulario.quantidade }}
+
+                    {% for erro in formulario.quantidade.errors %}
+                        <p class="error">{{ erro }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn">
+                        Confirmar movimentação
+                    </button>
+
+                    <a href="{% url 'listar_produtos' %}"
+                       class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

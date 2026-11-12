@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Produto | Keener Innovations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            background: #101d35;
+            color: white;
+            padding: 32px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .brand {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 48px;
+        }
+
+        .brand span {
+            color: #27a5ff;
+        }
+
+        .menu a {
+            display: block;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 9px;
+            color: #c3cee0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #087de0;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 42px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 29px;
+            margin: 0 0 9px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #748197;
+        }
+
+        .card {
+            max-width: 680px;
+            background: white;
+            padding: 34px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(17, 35, 63, 0.05);
+        }
+
+        .field {
+            margin-bottom: 23px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .field input {
+            display: block;
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d8e1ed;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #087de0;
+            box-shadow: 0 0 0 3px rgba(8, 125, 224, 0.1);
+        }
+
+        .errors {
+            margin-top: 8px;
+            color: #d12f45;
+            font-size: 13px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            border: 0;
+            border-radius: 9px;
+            padding: 13px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #087de0;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0667ba;
+        }
+
+        .btn-secondary {
+            background: #e9eef6;
+            color: #263b57;
+        }
+
+        .info {
+            background: #eff6ff;
+            color: #345578;
+            padding: 14px;
+            border-radius: 9px;
+            margin-bottom: 26px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .brand {
+                margin-bottom: 20px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 22px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">KEENER<span>.</span></div>
+
+        <nav class="menu">
+            <a href="{% url 'listar_produtos' %}" class="active">
+                Produtos
+            </a>
+
+            <a href="{% url 'cadastrar_produto' %}">
+                Cadastrar produto
+            </a>
+
+            <a href="{% url 'registrar_movimentacao' %}">
+                Movimentar estoque
+            </a>
+
+            <a href="{% url 'historico_movimentacoes' %}">
+                Histórico
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main">
+
+        <div class="header">
+            <h1>Editar produto</h1>
+            <p>Atualize as informações do produto cadastrado.</p>
+        </div>
+
+        <section class="card">
+
+            <div class="info">
+                Editando: <strong>{{ produto.nome }}</strong>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if formulario.non_field_errors %}
+                    <div class="errors">
+                        {{ formulario.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="field">
+                    <label for="{{ formulario.nome.id_for_label }}">
+                        Nome do produto
+                    </label>
+
+                    {{ formulario.nome }}
+
+                    {% if formulario.nome.errors %}
+                        <div class="errors">
+                            {{ formulario.nome.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="field">
+                    <label for="{{ formulario.codigo.id_for_label }}">
+                        Código do produto
+                    </label>
+
+                    {{ formulario.codigo }}
+
+                    {% if formulario.codigo.errors %}
+                        <div class="errors">
+                            {{ formulario.codigo.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                        Salvar alterações
+                    </button>
+
+                    <a href="{% url 'listar_produtos' %}"
+                       class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
