@@ -1,0 +1,130 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #101d35;
+            color: white;
+            position: fixed;
+            padding: 30px 20px;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .brand span {
+            color: #39a9ff;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #9aabc7;
+            margin-bottom: 45px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-radius: 9px;
+            text-decoration: none;
+            color: #c5d2e6;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #1c365c;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 29px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.04);
+            max-width: 650px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 9px;
+        }
+
+        .help {
+            color: #718096;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .error {
+            color: #c62828;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            background: #087de0;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #0665b5;
+        }
+
+        .btn-secondary {
+            background: #edf2f8;
+            color: #30415c;
+        }
+
+        .btn-secondary:hover {
+            background: #dce5f0;
+        }

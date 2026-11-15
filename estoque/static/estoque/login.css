@@ -1,0 +1,103 @@
+.login-area {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .login-card h2 {
+            font-size: 32px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            color: #748197;
+            font-size: 15px;
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            background: #087de0;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #0667ba;
+        }
+
+        .register {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 14px;
+            color: #748197;
+        }
+
+        .register a {
+            color: #087de0;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register a:hover {
+            text-decoration: underline;
+        }
+
+        .errors {
+            padding: 13px 15px;
+            margin-bottom: 22px;
+            background: #ffe8ec;
+            color: #bd233c;
+            border-radius: 9px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .field-error {
+            margin-top: 7px;
+            color: #bd233c;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .presentation {
+                display: none;
+            }
+
+            .login-area {
+                width: 100%;
+                min-height: 100vh;
+                padding: 25px;
+            }
+
+            .mobile-brand {
+                display: block;
+                margin-bottom: 45px;
+                font-size: 29px;
+                font-weight: 800;
+                color: #101d35;
+            }
+
+            .mobile-brand span {
+                color: #087de0;
+            }
+
+            .login-card h2 {
+                font-size: 28px;
+            }
+        }

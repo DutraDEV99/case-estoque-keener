@@ -1,0 +1,253 @@
+.sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            min-height: 100vh;
+            padding: 32px 20px;
+            background: #101d35;
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 29px;
+            margin: 0 0 9px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 13px 18px;
+            background: #087de0;
+            color: white;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 26px;
+            box-shadow: 0 6px 25px rgba(17, 35, 63, 0.05);
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .toolbar h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .filter {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #52627a;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter input {
+            width: 17px;
+            height: 17px;
+            accent-color: #087de0;
+            cursor: pointer;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e9edf4;
+            font-size: 14px;
+        }
+
+        th {
+            color: #748197;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-active {
+            background: #def7e9;
+            color: #137a45;
+        }
+
+        .status-inactive {
+            background: #ffe8ec;
+            color: #bd233c;
+        }
+
+        .action-cell {
+            text-align: right;
+            width: 100px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .dropdown summary {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid #e1e7f0;
+            border-radius: 9px;
+            background: #fff;
+            font-size: 23px;
+            font-weight: 700;
+            color: #52627a;
+            cursor: pointer;
+        }
+
+        .dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .dropdown summary:hover {
+            background: #f0f5fc;
+        }
+
+        .dropdown-menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: auto;
+            z-index: 1000;
+            width: 180px;
+            max-width: calc(100vw - 16px);
+            max-height: calc(100dvh - 16px);
+            overflow-y: auto;
+            padding: 7px;
+            background: white;
+            border: 1px solid #e1e7f0;
+            border-radius: 11px;
+            box-shadow: 0 10px 28px rgba(16, 29, 53, 0.14);
+        }
+
+        .dropdown-menu a,
+        .dropdown-menu button {
+            display: block;
+            width: 100%;
+            padding: 11px 12px;
+            border: none;
+            border-radius: 7px;
+            background: transparent;
+            color: #263b57;
+            text-decoration: none;
+            text-align: left;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu button:hover {
+            background: #f0f5fc;
+        }
+
+        .dropdown-menu .delete {
+            color: #bd233c;
+        }
+
+        .dropdown-menu .delete:hover {
+            background: #fff0f2;
+        }
+
+        .dropdown-menu form {
+            margin: 0;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            background: #e7f1ff;
+            color: #174d80;
+            border-radius: 9px;
+        }
+
+        .message.success {
+            background: #def7e9;
+            color: #137a45;
+        }
+
+        .message.error {
+            background: #ffe8ec;
+            color: #bd233c;
+        }
+
+        .empty {
+            padding: 35px;
+            text-align: center;
+            color: #748197;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .brand {
+                margin-bottom: 20px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 22px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+        }

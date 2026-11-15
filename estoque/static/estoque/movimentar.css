@@ -1,0 +1,49 @@
+input, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dbe3ef;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+            background: #fbfcfe;
+            color: #17243b;
+        }
+
+        input:focus, select:focus {
+            border-color: #087de0;
+            box-shadow: 0 0 0 3px rgba(8,125,224,.1);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .notice {
+            background: #eaf4ff;
+            border-left: 4px solid #087de0;
+            padding: 15px;
+            border-radius: 8px;
+            color: #31567b;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }

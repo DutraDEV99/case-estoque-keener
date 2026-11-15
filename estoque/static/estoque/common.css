@@ -1,0 +1,8 @@
+.logout-form { margin-top: 24px; }
+.logout-button { background: transparent; color: #c3cee0; border: 1px solid #c3cee0; border-radius: 9px; padding: 12px 16px; cursor: pointer; font: inherit; }
+.logout-button:hover { background: #087de0; color: white; }
+.pagination { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
+.pagination a { color: #087de0; }
+.server-filters { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.server-filters input[type="search"] { padding: 10px; border: 1px solid #c3cee0; border-radius: 8px; }
+.server-filters button { padding: 10px 16px; border: 0; border-radius: 8px; background: #087de0; color: white; cursor: pointer; }

@@ -3,7 +3,9 @@ from django import forms
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.core.paginator import Paginator
 from django.db import transaction
+from django.db.models import Q
 from django.db.models.deletion import ProtectedError
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
@@ -63,12 +65,21 @@ class MovimentacaoForm(forms.ModelForm):
 # LISTAR PRODUTOS
 @login_required
 def listar_produtos(request):
-    produtos = Produto.objects.order_by("nome")
+    mostrar_desativados = request.GET.get("inativos") == "1"
+    produtos = Produto.objects.order_by("nome", "pk")
+    if not mostrar_desativados:
+        produtos = produtos.filter(ativo=True)
+    pagina = Paginator(produtos, 20).get_page(request.GET.get("page"))
 
     return render(
         request,
         "estoque/produtos.html",
-        {"produtos": produtos},
+        {
+            "produtos": pagina,
+            "page_obj": pagina,
+            "mostrar_desativados": mostrar_desativados,
+            "pagination_query": "inativos=1&" if mostrar_desativados else "",
+        },
     )
 
 
@@ -269,14 +280,28 @@ def registrar_movimentacao(request):
 # HISTÓRICO DE MOVIMENTAÇÕES
 @login_required
 def historico_movimentacoes(request):
+    busca = request.GET.get("q", "").strip()
     movimentacoes = (
         Movimentacao.objects
         .select_related("produto", "usuario")
         .order_by("-data", "-id")
     )
+    if busca:
+        movimentacoes = movimentacoes.filter(
+            Q(produto__nome__icontains=busca)
+            | Q(usuario__username__icontains=busca)
+        )
+    pagina = Paginator(movimentacoes, 20).get_page(request.GET.get("page"))
+    parametros = request.GET.copy()
+    parametros.pop("page", None)
 
     return render(
         request,
         "estoque/historico.html",
-        {"movimentacoes": movimentacoes},
+        {
+            "movimentacoes": pagina,
+            "page_obj": pagina,
+            "busca": busca,
+            "pagination_query": parametros.urlencode() + "&" if parametros else "",
+        },
     )

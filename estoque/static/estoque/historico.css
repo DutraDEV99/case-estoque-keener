@@ -1,0 +1,161 @@
+.sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            min-height: 100vh;
+            padding: 32px 20px;
+            background: #101d35;
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0 0 9px;
+            font-size: 29px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 13px 18px;
+            border-radius: 9px;
+            background: #087de0;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 26px;
+            box-shadow: 0 6px 25px rgba(17, 35, 63, 0.05);
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .toolbar h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .search {
+            width: 280px;
+            max-width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d8e1ed;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: #087de0;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e9edf4;
+            font-size: 14px;
+        }
+
+        th {
+            color: #748197;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .entrada {
+            background: #def7e9;
+            color: #137a45;
+        }
+
+        .saida {
+            background: #ffe8ec;
+            color: #bd233c;
+        }
+
+        .quantidade-entrada {
+            color: #137a45;
+            font-weight: 700;
+        }
+
+        .quantidade-saida {
+            color: #bd233c;
+            font-weight: 700;
+        }
+
+        .muted {
+            color: #748197;
+        }
+
+        .empty {
+            padding: 35px;
+            text-align: center;
+            color: #748197;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .brand {
+                margin-bottom: 20px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 22px;
+            }
+
+            .card {
+                padding: 16px;
+            }
+
+            .search {
+                width: 100%;
+            }
+        }

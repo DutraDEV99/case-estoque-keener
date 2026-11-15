@@ -1,0 +1,105 @@
+* {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .presentation {
+            width: 50%;
+            background: linear-gradient(
+                145deg,
+                #101d35 0%,
+                #142e53 60%,
+                #075ba8 100%
+            );
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentation::after {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            right: -140px;
+            bottom: -140px;
+        }
+
+        .brand {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+
+        .brand span {
+            color: #27a5ff;
+        }
+
+        .presentation h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            max-width: 480px;
+            margin: 0 0 22px;
+        }
+
+        .presentation p {
+            color: #c0d0e4;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 450px;
+        }
+
+        .presentation-footer {
+            margin-top: 70px;
+            color: #8ea7c7;
+            font-size: 13px;
+        }
+
+        .mobile-brand {
+            display: none;
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d8e1ed;
+            border-radius: 9px;
+            background: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #087de0;
+            box-shadow: 0 0 0 3px rgba(8, 125, 224, 0.1);
+        }

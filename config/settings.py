@@ -1,7 +1,7 @@
 
 """
 Django settings for config project.
-Sistema de Gestão de Estoque - Keener Innovations
+Sistema de Gestão de Estoque - DutraDEV99
 """
 
 import os
@@ -88,27 +88,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# BANCO DE DADOS
-# Render: PostgreSQL
-# Computador: MySQL
-
+# SQLite local; PostgreSQL quando DATABASE_URL estiver configurada.
 if os.environ.get("DATABASE_URL"):
-    DATABASES = {
-        "default": dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=not DEBUG,
-        )
-    }
+    database = dj_database_url.parse(
+        os.environ["DATABASE_URL"],
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+    if database["ENGINE"] == "django.db.backends.postgresql" and not DEBUG:
+        database.setdefault("OPTIONS", {})["sslmode"] = "require"
+    DATABASES = {"default": database}
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": "estoque",
-            "USER": "django_estoque",
-            "PASSWORD": os.environ["ESTOQUE_DB_PASSWORD"],
-            "HOST": "localhost",
-            "PORT": "3306",
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+            "OPTIONS": {"timeout": 20},
         }
     }
 
@@ -170,4 +165,12 @@ SECURE_PROXY_SSL_HEADER = (
 )
 
 SECURE_SSL_REDIRECT = not DEBUG
-SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_SECONDS = int(os.environ.get(
+    "DJANGO_HSTS_SECONDS", "0" if DEBUG else "3600"
+))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = os.environ.get(
+    "DJANGO_HSTS_INCLUDE_SUBDOMAINS", "False"
+).lower() == "true"
+SECURE_HSTS_PRELOAD = os.environ.get(
+    "DJANGO_HSTS_PRELOAD", "False"
+).lower() == "true"

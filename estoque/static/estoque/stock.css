@@ -1,0 +1,51 @@
+* {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #17243b;
+        }
+
+        .brand {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 48px;
+        }
+
+        .brand span {
+            color: #27a5ff;
+        }
+
+        .menu a {
+            display: block;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 9px;
+            color: #c3cee0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #087de0;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 42px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #748197;
+        }
+
+        .btn-primary:hover {
+            background: #0667ba;
+        }

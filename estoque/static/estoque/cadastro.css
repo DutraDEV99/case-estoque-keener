@@ -1,0 +1,123 @@
+.register-area {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px 0;
+        }
+
+        .register-card h2 {
+            font-size: 32px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            color: #748197;
+            font-size: 15px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .field-help {
+            color: #748197;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 9px;
+        }
+
+        .field-help ul {
+            padding-left: 18px;
+            margin: 8px 0;
+        }
+
+        .field-help li {
+            margin-bottom: 5px;
+        }
+
+        .field-error {
+            color: #bd233c;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .field-error ul {
+            padding-left: 18px;
+        }
+
+        .errors {
+            padding: 13px 15px;
+            margin-bottom: 22px;
+            background: #ffe8ec;
+            color: #bd233c;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            background: #087de0;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-register:hover {
+            background: #0667ba;
+        }
+
+        .login-link {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 14px;
+            color: #748197;
+        }
+
+        .login-link a {
+            color: #087de0;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .presentation {
+                display: none;
+            }
+
+            .register-area {
+                width: 100%;
+                min-height: 100vh;
+                padding: 25px;
+            }
+
+            .mobile-brand {
+                display: block;
+                margin-bottom: 35px;
+                font-size: 29px;
+                font-weight: 800;
+                color: #101d35;
+            }
+
+            .mobile-brand span {
+                color: #087de0;
+            }
+
+            .register-card h2 {
+                font-size: 28px;
+            }
+        }

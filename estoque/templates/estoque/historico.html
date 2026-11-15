@@ -1,230 +1,8 @@
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Histórico | DutraDEV99</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f3f6fb;
-            color: #17243b;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
-            min-height: 100vh;
-            padding: 32px 20px;
-            background: #101d35;
-            color: white;
-        }
-
-        .brand {
-            font-size: 27px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 48px;
-        }
-
-        .brand span {
-            color: #27a5ff;
-        }
-
-        .menu a {
-            display: block;
-            padding: 14px 16px;
-            margin-bottom: 10px;
-            border-radius: 9px;
-            color: #c3cee0;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .menu a:hover,
-        .menu a.active {
-            background: #087de0;
-            color: white;
-        }
-
-        .main {
-            margin-left: 250px;
-            padding: 42px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            margin: 0 0 9px;
-            font-size: 29px;
-        }
-
-        .header p {
-            margin: 0;
-            color: #748197;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 13px 18px;
-            border-radius: 9px;
-            background: #087de0;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .btn-primary:hover {
-            background: #0667ba;
-        }
-
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 26px;
-            box-shadow: 0 6px 25px rgba(17, 35, 63, 0.05);
-        }
-
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 22px;
-        }
-
-        .toolbar h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .search {
-            width: 280px;
-            max-width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #d8e1ed;
-            border-radius: 9px;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .search:focus {
-            border-color: #087de0;
-        }
-
-        .table-wrap {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th,
-        td {
-            padding: 16px 12px;
-            border-bottom: 1px solid #e9edf4;
-            font-size: 14px;
-        }
-
-        th {
-            color: #748197;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 7px 11px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .entrada {
-            background: #def7e9;
-            color: #137a45;
-        }
-
-        .saida {
-            background: #ffe8ec;
-            color: #bd233c;
-        }
-
-        .quantidade-entrada {
-            color: #137a45;
-            font-weight: 700;
-        }
-
-        .quantidade-saida {
-            color: #bd233c;
-            font-weight: 700;
-        }
-
-        .muted {
-            color: #748197;
-        }
-
-        .empty {
-            padding: 35px;
-            text-align: center;
-            color: #748197;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 800px) {
-            .sidebar {
-                position: static;
-                width: 100%;
-                min-height: auto;
-            }
-
-            .brand {
-                margin-bottom: 20px;
-            }
-
-            .main {
-                margin-left: 0;
-                padding: 22px;
-            }
-
-            .card {
-                padding: 16px;
-            }
-
-            .search {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Histórico | DutraDEV99{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{% static 'estoque/stock.css' %}"><link rel="stylesheet" href="{% static 'estoque/historico.css' %}">{% endblock %}
+{% block content %}
 
     <aside class="sidebar">
         <div class="brand">DutraDEV99<span>.</span></div>
@@ -246,6 +24,10 @@
                 Histórico
             </a>
         </nav>
+        <form method="post" action="{% url 'logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Sair</button>
+        </form>
     </aside>
 
     <main class="main">
@@ -266,17 +48,19 @@
             </a>
         </div>
 
+        {% if messages %}
+            <div class="messages">{% for message in messages %}<p class="message {{ message.tags }}">{{ message }}</p>{% endfor %}</div>
+        {% endif %}
         <section class="card">
 
             <div class="toolbar">
                 <h2>Movimentações registradas</h2>
 
-                <input
-                    type="search"
-                    id="buscar"
-                    class="search"
-                    placeholder="Buscar produto ou usuário..."
-                    aria-label="Buscar movimentações">
+                <form method="get" class="server-filters">
+                    <label for="buscar">Buscar produto ou usuário</label>
+                    <input type="search" id="buscar" name="q" value="{{ busca }}" class="search" placeholder="Buscar produto ou usuário...">
+                    <button type="submit">Buscar</button>
+                </form>
             </div>
 
             <div class="table-wrap">
@@ -348,44 +132,9 @@
                 </table>
             </div>
 
-            <p id="semResultados" class="empty hidden">
-                Nenhuma movimentação encontrada para essa busca.
-            </p>
-
         </section>
+        {% include "estoque/_pagination.html" %}
 
     </main>
 
-    <script>
-        const campoBusca = document.getElementById("buscar");
-        const linhas = document.querySelectorAll(
-            ".linha-movimentacao"
-        );
-        const semResultados = document.getElementById(
-            "semResultados"
-        );
-
-        campoBusca.addEventListener("input", function() {
-            const termo = this.value.toLowerCase().trim();
-            let encontrados = 0;
-
-            linhas.forEach(function(linha) {
-                const texto = linha.textContent.toLowerCase();
-                const corresponde = texto.includes(termo);
-
-                linha.classList.toggle("hidden", !corresponde);
-
-                if (corresponde) {
-                    encontrados++;
-                }
-            });
-
-            semResultados.classList.toggle(
-                "hidden",
-                encontrados > 0 || linhas.length === 0
-            );
-        });
-    </script>
-
-</body>
-</html>
+{% endblock %}
