@@ -1,7 +1,7 @@
 
 # Sistema de Gestão de Estoque
 
-Aplicação web desenvolvida em Python/Django e MySQL como parte de um desafio técnico para a Keener Innovations.
+Aplicação web desenvolvida em Python/Django e SQLite como parte de um desafio técnico para a DutraDEV99.
 
 O sistema permite cadastrar produtos, controlar entradas e saídas de estoque e consultar o histórico de movimentações, com autenticação de usuários.
 
@@ -9,7 +9,7 @@ O sistema permite cadastrar produtos, controlar entradas e saídas de estoque e 
 
 - Python
 - Django 5.2
-- MySQL
+- SQLite (incluído no Python)
 - HTML5
 - CSS3
 - JavaScript
@@ -50,7 +50,7 @@ O sistema permite cadastrar produtos, controlar entradas e saídas de estoque e 
 Para executar o projeto, é necessário instalar:
 
 - Python 3.10 ou superior, compatível com Django 5.2
-- MySQL
+- SQLite (incluído no Python)
 - Git (opcional, para clonar o repositório)
 
 ## Instalação
@@ -58,11 +58,11 @@ Para executar o projeto, é necessário instalar:
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/DutraDEV99/case-estoque-keener.git
-cd case-estoque-keener
+git clone <URL_DO_REPOSITORIO> Case-estoque
+cd Case-estoque
 ```
 
-O repositório é privado e exige autorização de acesso.
+Substitua `<URL_DO_REPOSITORIO>` pela URL do repositório. Repositórios privados exigem autorização de acesso.
 
 ### 2. Criar o ambiente virtual
 
@@ -78,39 +78,19 @@ No Windows:
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-### 4. Configurar o MySQL
+### 4. Banco SQLite
 
-Crie o banco de dados e um usuário com permissões adequadas:
+O projeto utiliza o arquivo `db.sqlite3` na raiz. Preserve esse arquivo para manter os dados existentes. O SQLite dispensa um servidor de banco de dados.
 
-```sql
-CREATE DATABASE estoque
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
+### 5. Configurar a chave do Django
 
-CREATE USER 'django_estoque'@'localhost'
-IDENTIFIED BY 'SENHA_FORTE_AQUI';
-
-GRANT ALL PRIVILEGES ON estoque.*
-TO 'django_estoque'@'localhost';
-```
-
-Substitua `SENHA_FORTE_AQUI` por uma senha própria.
-
-### 5. Configurar as variáveis de ambiente
-
-O projeto utiliza variáveis de ambiente para proteger credenciais.
-
-No PowerShell:
+Mantenha o valor existente de `DJANGO_SECRET_KEY`, se configurado. Em uma nova instalação, gere uma chave no PowerShell:
 
 ```powershell
-$env:ESTOQUE_DB_PASSWORD = "SENHA_DO_MYSQL"
-
 $env:DJANGO_SECRET_KEY = & ".\.venv\Scripts\python.exe" -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
 ```
 
-Substitua `SENHA_DO_MYSQL` pela senha definida no MySQL.
-
-Essas variáveis são temporárias e permanecem disponíveis apenas na sessão atual do terminal.
+Essa variável permanece disponível apenas na sessão atual do terminal.
 
 ### 6. Executar as migrações
 
