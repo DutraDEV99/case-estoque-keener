@@ -53,7 +53,7 @@ Captura da interface com dados fictícios de demonstração.
 
 Para executar o projeto, é necessário instalar:
 
-- Python 3.10 ou superior, compatível com Django 5.2
+- Python 3.11 ou superior (a versão fixada de asgiref exige Python 3.11+)
 - SQLite (incluído no Python)
 - Git (opcional, para clonar o repositório)
 
